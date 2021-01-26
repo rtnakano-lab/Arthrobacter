@@ -52,8 +52,6 @@ Fig_S1A <- ggplot(PCoA_w, aes(PC1, PC2, colour=treatment)) +
         axis.title.y = element_text(size= 20, colour = "black"),
         legend.position = "none") 
 
-Fig_S1A
-
 ggsave(Fig_S1A, file=paste(Fig, "PCoA_plot_weigted_Fig_S1A.pdf", sep=""), width=6, height=5, bg="transparent")
 
 
@@ -76,8 +74,6 @@ Fig_S1B <- ggplot(PCoA_u, aes(PC1, PC2, colour=treatment)) +
         axis.title.x = element_text(size= 20, colour = "black"),
         axis.title.y = element_text(size= 20, colour = "black"),
         legend.position = "none") 
-
-Fig_S1B
 
 ggsave(Fig_S1B, file=paste(Fig, "PCoA_plot_unweigted_Fig_S1B.pdf", sep=""), width=6, height=5, bg="transparent")
 
@@ -115,8 +111,6 @@ Fig_S3A <- ggplot(uni_sto , aes(x=ID, y=value)) +
         legend.position = "none") +
   ylab("Weighted UniFrac distance")
 
-Fig_S3A
-
 ggsave(Fig_S3A, file=paste(Fig, "weigted_uni_sto_Fig_S3A.pdf", sep=""), width=6, height=5, bg="transparent")
 
 # nicotine
@@ -141,8 +135,6 @@ Fig_S3B <- ggplot(uni_nic , aes(x=ID, y=value)) +
         legend.position = "none") +
   ylab("Weighted UniFrac distance")
 
-Fig_S3B
-
 ggsave(Fig_S3B, file=paste(Fig, "weigted_uni_nic_Fig_S3B.pdf", sep=""), width=6, height=5, bg="transparent")
 
 # dual metabolites
@@ -166,8 +158,6 @@ Fig_S7 <- ggplot(uni_dual , aes(x=ID, y=value)) +
         axis.title.y = element_text(size= 25, colour = "black"),
         legend.position = "none") +
   ylab("Weighted UniFrac distance")
-
-Fig_S7
 
 ggsave(Fig_S7, file=paste(Fig, "weigted_uni_dual_Fig_S7.pdf", sep=""), width=6, height=5, bg="transparent")
 
@@ -243,5 +233,3 @@ per_nt <-adonis(nt_uni_table~group, meta_nt)
 sink(paste(data, "Adonis_nt.txt", sep=""))
 print(per_nt)
 sink()
-
-
