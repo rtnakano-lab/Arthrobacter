@@ -38,7 +38,6 @@ ra_order100 <-  apply(ra_order, c(1,2), function(x){
   a <- x*100
   return(a)
 })
-ra_order100 
 ra_order100 <- data.frame(ra_order100, stringsAsFactors=F)
 
 ##taxon average top 20
@@ -91,8 +90,6 @@ Fig_1A <- ggplot(table_tobacco, aes(x= rep, y = value, fill = order)) +
         legend.position = 'none') +
   labs(x= "", y = "Relative abundance")
 
-Fig_1A
-
 ggsave(Fig_1A, file=paste(Fig, "taxa_bar_plot_tobacco_Fig_1A.pdf", sep=""), width=6, height=5, bg="transparent")
 
 ##Tobacco
@@ -111,8 +108,6 @@ Fig_1B <- ggplot(table_tobacco, aes(x= rep, y = value, fill = order)) +
         strip.text  = element_text(size=20),
         legend.position = 'none') +
   labs(x= "", y = "Relative abundance")
-
-Fig_1B
 
 ggsave(Fig_1B, file=paste(Fig, "taxa_bar_plot_tobacco_Fig_1B.pdf", sep=""), width=6, height=5, bg="transparent")
 
@@ -137,9 +132,7 @@ Fig_1C <- ggplot(table_sto, aes(x= rep, y = value, fill = order)) +
         strip.text  = element_text(size=20),
         legend.position = 'none') +
   labs(x= "", y = "Relative abundance")
-
-Fig_1C
-
+                  
 ggsave(Fig_1C, file=paste(Fig, "taxa_bar_plot_sto_Fig_1C.pdf", sep=""), width=6, height=5, bg="transparent")
 
 ##Nicotine 
@@ -164,10 +157,7 @@ Fig_1D <- ggplot(table_nic, aes(x=rep, y = value, fill = order)) +
         legend.position = 'none') +
   labs(x= "", y = "Relative abundance")
 
-Fig_1D
-
 ggsave(Fig_1D, file=paste(Fig, "taxa_bar_plot_nic_Fig_1D.pdf", sep=""), width=6, height=5, bg="transparent")
-
 
 ##Dual
 table_dual <- order_table[order_table$treatment=="dual",]
@@ -188,8 +178,6 @@ Fig_S6A <- ggplot(table_dual, aes(x= rep, y = value, fill = order)) +
         strip.text  = element_text(size=12),
         legend.position = 'none') +
   labs(x= "", y = "Relative abundance")
-
-Fig_S6A
 
 ggsave(Fig_S6A, file=paste(Fig, "taxa_bar_plot_dual_Fig_S6A.pdf", sep=""), width=6, height=5, bg="transparent")
 
@@ -232,8 +220,6 @@ Art$V2 　　<- str_replace(Art$V2, "dual_High", "Dual 1000")
 Art$V2 　　<- str_replace(Art$V2, "dual_Low", "Dual 500")
 Art$V2 　　<- str_replace(Art$V2, "dual_Mock", "Dual 0")
 
-
-##Fig 2B
 list_2B <- c("Santhopine 0","Santhopine 1000", "Nicotine 0", "Nicotine 1000",
                 "Tobacco Bulk", "Tobacco ES", "Farm Bulk","Soybean ES", "Tomato ES", "Bitter melon ES")
 
@@ -251,13 +237,12 @@ Fig_2B <- ggplot(Art_2B, aes(x = V2, y = mean, fill = treatment)) +
         axis.text.y = element_text(colour = "black", size = 15),
         axis.text   = element_text(colour = "black"),
         legend.position = 'none') 
-Fig_2B
 
 ggsave(Fig_2B, file=paste(Fig, "Art_relative_abundance_Fig_2B.pdf", sep=""), width=6, height=5, bg="transparent")
 
 
 ##Fig S6B
-list_S6B <- c("Dual 0","Dual 500", "Dual 1000")
+list_S6B 　　　　　　　　　<- c("Dual 0","Dual 500", "Dual 1000")
 Art_S6B                 <- Art[Art$V2 %in% list_S6B,]
 Art_S6B$V2              <-factor(Art_S6B$V2,    levels=list_S6B )
 
@@ -272,10 +257,8 @@ Fig_S6B <- ggplot(Art_S6B, aes(x = V2, y = mean, fill = treatment)) +
         axis.text.y = element_text(colour = "black", size = 15),
         axis.text   = element_text(colour = "black"),
         legend.position = 'none') 
-Fig_S6B
-
+                  
 ggsave(Fig_S6B, file=paste(Fig, "Art_relative_abundance_Fig_S6B.pdf", sep=""), width=6, height=5, bg="transparent")
-
 
 ## colleretion of Arthrobacter
 ##Santhopine
@@ -298,7 +281,6 @@ Fig_S2A <- ggplot(Sto_art, aes(x= conc, y = rel)) +
         legend.position = 'none') +
   labs(x= "Santhopine concentration\n(nmol/g soil)", y = "Relative abundance of \n Arthrobacter (%)")
 
-Fig_S2A
 ggsave(Fig_S2A, file=paste(Fig, "correlation_arthro_soc_Fig_S2A.pdf", sep=""), width=6, height=5, bg="transparent")
 
 ##Nicotine
@@ -322,7 +304,6 @@ Fig_S2B <- ggplot(Nic_art, aes(x= conc, y = rel)) +
         legend.position = 'none') +
   labs(x= "Nicotine concentration\n(nmol/g soil)", y = "Relative abundance of \n Arthrobacter (%)")
 
-Fig_S2B
 ggsave(Fig_S2B, file=paste(Fig, "correlation_arthro_nic_Fig_S2B.pdf", sep=""), width=6, height=5, bg="transparent")
 
 ##Linear regression analysis
@@ -339,6 +320,3 @@ Nic_lm.s <- summary(Nic_lm_art)
 sink(paste(data, "LRA_nic.txt", sep=""))
 print(Nic_lm.s)
 sink()
-
-
-
