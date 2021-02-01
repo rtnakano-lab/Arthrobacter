@@ -1,7 +1,6 @@
-# R script for pan-genome analysis using orthologous groups from shimasaki et al., 2021
+# R script for rhizobia genes analysis from shimasaki et al., 2021
 #orininally from Tomohisa Shimasaki
 #shimasaki.tomohisa.45c@st.kyoto-u.ac.jp
-
 
 # cleanup
 rm(list = ls())
@@ -68,8 +67,7 @@ origin <- ggplot(design, aes(x=Origin, y=ratio, color=Origin)) +
 
 ggsave(origin, file=paste(fig, "box_plot_origin.pdf", sep=""), width=6, height=5, bg="transparent")
 
-
-##remove high similarity genomes
+##similarity analysis
 out           <- matrix(0, nrow = 99 , ncol = 99)
 colnames(out) <- colnames(OG_tab)
 rownames(out) <- colnames(OG_tab)
