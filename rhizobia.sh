@@ -5,6 +5,7 @@
 # originally by Tomohisa Shimasaki
 # shimasaki.tomohisa.45c@st.kyoto-u.ac.jp
 
+##directories
 db="/Users/shimasakitomohisa/Desktop/github/2021_mBio/Rhizobia/db"
 list="/Users/shimasakitomohisa/Desktop/github/2021_mBio/Rhizobia/list"
 query="/Users/shimasakitomohisa/Desktop/github/2021_mBio/Rhizobia/query"
@@ -20,23 +21,11 @@ do
 seqkit grep -nrp $i ${db}/Rlv3841.fasta  >> ${query}/seq_list_3831.fasta
 done
 
-## translate to  amino acid seq
+## translate to amino acid seq
 transeq -table 1 ${query}/seq_list_3831.fasta ${query}/protein_list_3841.fasta
 
 ##Run blast 3841
 blastp -num_threads 8 -outfmt "6 qseqid sseqid qcovs" -evalue 1e-5  -max_target_seqs 1 -db ${db}/Arthrobacter_all -query ${query}/protein_list_3841.fasta -out ${output}/Rlv3841.txt
-
-##extract OG ID 3841
-Art_3841_list=$(cut -f 2 ${output}/Rlv3841.txt)
-
-for i in $Art_3841_list
-do
-grep -x \>$i -rl ${OG} >> ${output}/OG_list_3841.txt
-done
-
-##Run blast 3841
-blastp -num_threads 8 -outfmt "6 qseqid sseqid qcovs" -evalue 1e-5  -max_target_seqs 1 -db ${db}/Arthrobacter_all -query ${query}/protein_list_3841.fasta -out ${output}/Rlv3841.txt
-
 
 ##extract OG ID 3841
 Art_3841_list=$(awk  '$3 >=50' ${output}/Rlv3841.txt | cut -f 2)
