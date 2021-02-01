@@ -23,16 +23,6 @@ done
 ## translate to  amino acid seq
 transeq -table 1 ${query}/seq_list_3831.fasta ${query}/protein_list_3841.fasta
 
-## extract target DNA seq 1021
-grep -f ${list}/1021_gene_list.txt ${list}/1021_protein_code.txt > ${list}/protein_list_1021.txt
-
-list_1021=$(cut -f 1 ${list}/protein_list_1021.txt)
-
-for i in $list_1021
-do
-seqkit grep -nrp $i ${db}/1021_proteome.fasta >> ${query}/protein_list_1021.fasta
-done
-
 ##Run blast 3841
 blastp -num_threads 8 -outfmt "6 qseqid sseqid qcovs" -evalue 1e-5  -max_target_seqs 1 -db ${db}/Arthrobacter_all -query ${query}/protein_list_3841.fasta -out ${output}/Rlv3841.txt
 
@@ -47,6 +37,7 @@ done
 ##Run blast 3841
 blastp -num_threads 8 -outfmt "6 qseqid sseqid qcovs" -evalue 1e-5  -max_target_seqs 1 -db ${db}/Arthrobacter_all -query ${query}/protein_list_3841.fasta -out ${output}/Rlv3841.txt
 
+
 ##extract OG ID 3841
 Art_3841_list=$(awk  '$3 >=50' ${output}/Rlv3841.txt | cut -f 2)
 
@@ -56,6 +47,16 @@ grep -x \>$i -rl ${OG} >> ${output}/OG_list_3841.txt
 done
 
 cut -f 9 -d "/"  ${output}/OG_list_3841.txt | sed 's/.fa//g' | sort | uniq > ${list}/OG_lD_3841.txt
+
+## extract target DNA seq 1021
+grep -f ${list}/1021_gene_list.txt ${list}/1021_protein_code.txt > ${list}/protein_list_1021.txt
+
+list_1021=$(cut -f 1 ${list}/protein_list_1021.txt)
+
+for i in $list_1021
+do
+seqkit grep -nrp $i ${db}/1021_proteome.fasta >> ${query}/protein_list_1021.fasta
+done
 
 ##Run blast 1021
 blastp -num_threads 8 -outfmt "6 qseqid sseqid qcovs" -evalue 1e-5  -max_target_seqs 1 -db ${db}/Arthrobacter_all -query ${query}/protein_list_1021.fasta -out ${output}/1021.txt
