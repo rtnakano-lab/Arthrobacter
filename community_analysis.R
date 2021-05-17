@@ -27,57 +27,6 @@ design$rep       <- factor(str_sub(design$V1, -1))
 design$group     <- str_replace(design$V2, ".*_", "")
 design$treatment <- str_replace(design$V2, "_.*", "")
 
-
-# PCoA plot of tobacco root microbiota
-color <- data.frame(names = c("Nt_Bulk", "Nt_RS", "Nt_RP", "Nt_ES"),
-                    col   = c("#000000", "#ff5f2e","#004e66","#fcbe32"),
-                    stringsAsFactors=F, check.names=F)
-# weighted unifrac
-idx        <- match(design$V1[design$treatment=="Nt"], colnames(w_UniFrac))
-Nt_uni_w     <- w_UniFrac[idx,idx]
-PCoA_w       <- cmdscale(Nt_uni_w, k = 2)
-PCoA_w       <- data.frame(ID = rownames(PCoA_w), PC1 = PCoA_w[,1], PC2 =PCoA_w[,2] , stringsAsFactors=F, check.names=F)
-idx        <- match(rownames(PCoA_w), design$V1)
-PCoA_w$treatment <- design$V2[idx]
-
-Fig_S1A <- ggplot(PCoA_w, aes(PC1, PC2, colour=treatment)) +
-  geom_point(size = 5) +
-  scale_colour_manual(values = color$col) +
-  labs(x= "PC1 (75.8%)", y = "PC2 (14.7%)") +
-  theme_classic(base_size = 20) +
-  theme(axis.ticks=element_line(colour = "black"), 
-        axis.text.x =element_text(size= 15, colour = "black"),
-        axis.text.y =element_text(size= 15, colour = "black"),
-        axis.title.x = element_text(size= 20, colour = "black"),
-        axis.title.y = element_text(size= 20, colour = "black"),
-        legend.position = "none") 
-
-ggsave(Fig_S1A, file=paste(Fig, "PCoA_plot_weigted_Fig_S1A.pdf", sep=""), width=6, height=5, bg="transparent")
-
-
-# unweighted unifrac
-idx        <- match(design$V1[design$treatment=="Nt"], colnames(u_UniFrac))
-Nt_uni_u     <- u_UniFrac[idx,idx]
-PCoA_u       <- cmdscale(Nt_uni_u, k = 2)
-PCoA_u       <- data.frame(ID = rownames(PCoA_u), PC1 = PCoA_u[,1], PC2 =PCoA_u[,2] , stringsAsFactors=F, check.names=F)
-idx        <- match(rownames(PCoA_u), design$V1)
-PCoA_u$treatment <- design$V2[idx]
-
-Fig_S1B <- ggplot(PCoA_u, aes(PC1, PC2, colour=treatment)) +
-  geom_point(size = 5) +
-  scale_colour_manual(values = color$col) +
-  labs(x="PC1 (40.3%)", y ="PC2 (10.5%)") +
-  theme_classic(base_size = 20) +
-  theme(axis.ticks=element_line(colour = "black"), 
-        axis.text.x =element_text(size= 15, colour = "black"),
-        axis.text.y =element_text(size= 15, colour = "black"),
-        axis.title.x = element_text(size= 20, colour = "black"),
-        axis.title.y = element_text(size= 20, colour = "black"),
-        legend.position = "none") 
-
-ggsave(Fig_S1B, file=paste(Fig, "PCoA_plot_unweigted_Fig_S1B.pdf", sep=""), width=6, height=5, bg="transparent")
-
-
 # comparison of weighted unifrac distance
 Uni_table            <- melt(w_UniFrac)
 idx_a                <- match(Uni_table$Var1, design$V1)
@@ -97,7 +46,7 @@ uni_sto$group2      <- str_replace(uni_sto$group2, "Root", "ES")
 uni_sto$ID          <- paste(uni_sto$group1, uni_sto$group2, sep="vs" )
 
 
-Fig_S3A <- ggplot(uni_sto , aes(x=ID, y=value)) +
+Fig_S1A <- ggplot(uni_sto , aes(x=ID, y=value)) +
   geom_boxplot(outlier.shape=NA, position=position_dodge()) +
   geom_jitter(size=2, position=position_jitter(width=0.15), alpha=.8) +
   scale_x_discrete(limits=c("0vsBulk", "1000vsBulk","0vsES", "1000vsES")) +
@@ -111,7 +60,7 @@ Fig_S3A <- ggplot(uni_sto , aes(x=ID, y=value)) +
         legend.position = "none") +
   ylab("Weighted UniFrac distance")
 
-ggsave(Fig_S3A, file=paste(Fig, "weigted_uni_sto_Fig_S3A.pdf", sep=""), width=6, height=5, bg="transparent")
+ggsave(Fig_S1A, file=paste(Fig, "weigted_uni_sto_Fig_S3A.pdf", sep=""), width=6, height=5, bg="transparent")
 
 # nicotine
 uni_nic             <- Uni_table[Uni_table$treatment1=="Nic" & Uni_table$treatment2=="Nt" & Uni_table$group1 %in% c("Mock", "High")  & Uni_table$group2 %in% c("Bulk", "Root"),]      
@@ -121,7 +70,7 @@ uni_nic$group2      <- str_replace(uni_nic$group2, "Root", "ES")
 uni_nic$ID          <- paste(uni_nic$group1, uni_nic$group2, sep="vs" )
 
 
-Fig_S3B <- ggplot(uni_nic , aes(x=ID, y=value)) +
+Fig_S1B <- ggplot(uni_nic , aes(x=ID, y=value)) +
   geom_boxplot(outlier.shape=NA, position=position_dodge()) +
   geom_jitter(size=2, position=position_jitter(width=0.15), alpha=.8) +
   scale_x_discrete(limits=c("0vsBulk", "1000vsBulk","0vsES", "1000vsES")) +
@@ -135,7 +84,7 @@ Fig_S3B <- ggplot(uni_nic , aes(x=ID, y=value)) +
         legend.position = "none") +
   ylab("Weighted UniFrac distance")
 
-ggsave(Fig_S3B, file=paste(Fig, "weigted_uni_nic_Fig_S3B.pdf", sep=""), width=6, height=5, bg="transparent")
+ggsave(Fig_S1B, file=paste(Fig, "weigted_uni_nic_Fig_S3B.pdf", sep=""), width=6, height=5, bg="transparent")
 
 # dual metabolites
 uni_dual             <- Uni_table[Uni_table$treatment1=="dual" & Uni_table$treatment2=="Nt" & Uni_table$group1 %in% c("Mock", "Low")  & Uni_table$group2 %in% c("Bulk", "Root"),]      
@@ -145,7 +94,7 @@ uni_dual$group2      <- str_replace(uni_dual$group2, "Root", "ES")
 uni_dual$ID          <- paste(uni_dual$group1, uni_dual$group2, sep="vs" )
 
 
-Fig_S7 <- ggplot(uni_dual , aes(x=ID, y=value)) +
+Fig_S5C <- ggplot(uni_dual , aes(x=ID, y=value)) +
   geom_boxplot(outlier.shape=NA, position=position_dodge()) +
   geom_jitter(size=2, position=position_jitter(width=0.15), alpha=.8) +
   scale_x_discrete(limits=c("0vsBulk", "Dual500vsBulk","0vsES", "Dual500vsES")) +
@@ -159,7 +108,7 @@ Fig_S7 <- ggplot(uni_dual , aes(x=ID, y=value)) +
         legend.position = "none") +
   ylab("Weighted UniFrac distance")
 
-ggsave(Fig_S7, file=paste(Fig, "weigted_uni_dual_Fig_S7.pdf", sep=""), width=6, height=5, bg="transparent")
+ggsave(Fig_S5C, file=paste(Fig, "weigted_uni_dual_Fig_S7.pdf", sep=""), width=6, height=5, bg="transparent")
 
 
 # ANOVA and post hoc TukeyHSD
