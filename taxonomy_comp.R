@@ -167,7 +167,7 @@ table_dual$group 　　<- str_replace(table_dual$group , "High", "Dual1000")
 table_dual$order    <- factor(table_dual$order,    levels=taxon_design_modi$order)
 table_dual$group    <- factor(table_dual$group,    levels=c("0","Dual500","Dual1000"))
 
-Fig_S6A <- ggplot(table_dual, aes(x= rep, y = value, fill = order)) +
+Fig_S5A <- ggplot(table_dual, aes(x= rep, y = value, fill = order)) +
   geom_bar(stat = "identity", position = "fill", colour = "black") +
   facet_grid(.~group) +
   theme_minimal(base_size = 20) +
@@ -179,7 +179,7 @@ Fig_S6A <- ggplot(table_dual, aes(x= rep, y = value, fill = order)) +
         legend.position = 'none') +
   labs(x= "", y = "Relative abundance")
 
-ggsave(Fig_S6A, file=paste(Fig, "taxa_bar_plot_dual_Fig_S6A.pdf", sep=""), width=6, height=5, bg="transparent")
+ggsave(Fig_S5A, file=paste(Fig, "taxa_bar_plot_dual_Fig_S6A.pdf", sep=""), width=6, height=5, bg="transparent")
 
 
 ## relative aboundance of genus Arthrobacter
@@ -205,7 +205,7 @@ col   <-               data.frame(names = unique(Art$treatment),
                                   col   = c("#3B3B3B", "#EBEBEB", "#636363", "#ABABAB", "#030303"),
                                   stringsAsFactors=F, check.names=F)
 
-##Fig 2B
+## change names
 Art$V2 　　<- str_replace(Art$V2, "Sto_High", "Santhopine 1000")
 Art$V2 　　<- str_replace(Art$V2, "Sto_Mock", "Santhopine 0")
 Art$V2 　　<- str_replace(Art$V2, "Nic_High", "Nicotine 1000")
@@ -220,6 +220,7 @@ Art$V2 　　<- str_replace(Art$V2, "dual_High", "Dual 1000")
 Art$V2 　　<- str_replace(Art$V2, "dual_Low", "Dual 500")
 Art$V2 　　<- str_replace(Art$V2, "dual_Mock", "Dual 0")
 
+## Fig 2B
 list_2B <- c("Santhopine 0","Santhopine 1000", "Nicotine 0", "Nicotine 1000",
                 "Tobacco Bulk", "Tobacco ES", "Farm Bulk","Soybean ES", "Tomato ES", "Bitter melon ES")
 
@@ -240,13 +241,12 @@ Fig_2B <- ggplot(Art_2B, aes(x = V2, y = mean, fill = treatment)) +
 
 ggsave(Fig_2B, file=paste(Fig, "Art_relative_abundance_Fig_2B.pdf", sep=""), width=6, height=5, bg="transparent")
 
+##Fig S5B
+list_S5B 　　　　　　　　　<- c("Dual 0","Dual 500", "Dual 1000")
+Art_S5B                 <- Art[Art$V2 %in% list_S5B,]
+Art_S5B$V2              <-factor(Art_S5B$V2,    levels=list_S5B )
 
-##Fig S6B
-list_S6B 　　　　　　　　　<- c("Dual 0","Dual 500", "Dual 1000")
-Art_S6B                 <- Art[Art$V2 %in% list_S6B,]
-Art_S6B$V2              <-factor(Art_S6B$V2,    levels=list_S6B )
-
-Fig_S6B <- ggplot(Art_S6B, aes(x = V2, y = mean, fill = treatment)) +
+Fig_S5B <- ggplot(Art_S5B, aes(x = V2, y = mean, fill = treatment)) +
   geom_bar(stat = "identity", colour = "black") +
   geom_errorbar(aes(ymin = mean - sd, ymax = mean + sd, width = 0.3)) +
   theme_classic(base_size = 20) +
@@ -258,7 +258,7 @@ Fig_S6B <- ggplot(Art_S6B, aes(x = V2, y = mean, fill = treatment)) +
         axis.text   = element_text(colour = "black"),
         legend.position = 'none') 
                   
-ggsave(Fig_S6B, file=paste(Fig, "Art_relative_abundance_Fig_S6B.pdf", sep=""), width=6, height=5, bg="transparent")
+ggsave(Fig_S5B, file=paste(Fig, "Art_relative_abundance_Fig_S6B.pdf", sep=""), width=6, height=5, bg="transparent")
 
 ## colleretion of Arthrobacter
 ##Santhopine
