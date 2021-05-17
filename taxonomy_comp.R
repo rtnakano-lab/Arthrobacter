@@ -271,7 +271,7 @@ Sto_art <- data.frame(conc=as.numeric(c("1000", "1000", "1000",
                       rel=sto_art,
                       stringsAsFactors=F)
 
-Fig_S2A <- ggplot(Sto_art, aes(x= conc, y = rel)) +
+Fig_S1C <- ggplot(Sto_art, aes(x= conc, y = rel)) +
   geom_point()+
   geom_smooth(method = "lm") +
   theme_gray(base_size = 20) +
@@ -281,7 +281,7 @@ Fig_S2A <- ggplot(Sto_art, aes(x= conc, y = rel)) +
         legend.position = 'none') +
   labs(x= "Santhopine concentration\n(nmol/g soil)", y = "Relative abundance of \n Arthrobacter (%)")
 
-ggsave(Fig_S2A, file=paste(Fig, "correlation_arthro_soc_Fig_S2A.pdf", sep=""), width=6, height=5, bg="transparent")
+ggsave(Fig_S1C, file=paste(Fig, "correlation_arthro_soc_Fig_S2A.pdf", sep=""), width=6, height=5, bg="transparent")
 
 ##Nicotine
 idx <- design$V1[design$treatment=="Nic"]
@@ -294,7 +294,7 @@ Nic_art <- data.frame(conc=as.numeric(c("250","250","250","250",
                       stringsAsFactors=F)
 colnames(Nic_art) <- c("conc", "rel")
 
-Fig_S2B <- ggplot(Nic_art, aes(x= conc, y = rel)) +
+Fig_S1D <- ggplot(Nic_art, aes(x= conc, y = rel)) +
   geom_point()+
   geom_smooth(method = "lm") +
   theme_gray(base_size = 20) +
@@ -304,7 +304,7 @@ Fig_S2B <- ggplot(Nic_art, aes(x= conc, y = rel)) +
         legend.position = 'none') +
   labs(x= "Nicotine concentration\n(nmol/g soil)", y = "Relative abundance of \n Arthrobacter (%)")
 
-ggsave(Fig_S2B, file=paste(Fig, "correlation_arthro_nic_Fig_S2B.pdf", sep=""), width=6, height=5, bg="transparent")
+ggsave(Fig_S1D, file=paste(Fig, "correlation_arthro_nic_Fig_S2B.pdf", sep=""), width=6, height=5, bg="transparent")
 
 ##Linear regression analysis
 # santhopine
