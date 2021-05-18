@@ -22,5 +22,5 @@ ACE.R
 
 Note:
 The sequence dataset supporting the results of this study was submitted to the DNA Data Bank of Japan (https://www.ddbj.nig.ac.jp)  
-・16S rRNA amplicon sequences. (PRJDB11062)  
-・assembled genomes of newly-sequenced Arthrobacter stains. (PRJDB11299)
+・16S rRNA amplicon sequences (PRJDB11062).  
+・assembled genomes of newly-sequenced Arthrobacter stains (PRJDB11299).
