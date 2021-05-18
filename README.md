@@ -9,17 +9,16 @@ scripts to reproduce the results from Shimasaki et al, 2021
 
 ##scripts related to community analysis of tobacco roots and metabolite-treated soils   
 qiime2.sh   
-taxonomy_comp.R 
+taxonomy_comp.R  
 community_analysis.R    
 GLM.R
-https://github.com/rtnakano-lab/Arthrobacter/blob/main/qiime2.sh
 
-##scripts related to comparative genome alanlysis of genus Arthrobacter
-KEGG_pan_genome.R
-OG_pan_genome.R
-rhizobia.sh
-rhizobia.R
-ACE.R
+##scripts related to comparative genome alanlysis of genus Arthrobacter  
+KEGG_pan_genome.R  
+OG_pan_genome.R  
+rhizobia.sh  
+rhizobia.R  
+ACE.R  
 
 Note:
 The sequence dataset supporting the results of this study was submitted to the DNA Data Bank of Japan (https://www.ddbj.nig.ac.jp)
