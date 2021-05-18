@@ -240,8 +240,7 @@ Fig_2B <- ggplot(Art_2B, aes(x = V2, y = mean, fill = treatment)) +
         legend.position = 'none') 
 
 ggsave(Fig_2B, file=paste(Fig, "Art_relative_abundance_Fig_2B.pdf", sep=""), width=6, height=5, bg="transparent")
-
-                  
+    
 ## relative aboundance of genus Arthrobacter in metabolite-treated soils
 ## Fig S2C (santhopine)                  
 Art_S5B$V2              <-factor(Art_S5B$V2,    levels=list_S5B )
@@ -260,7 +259,6 @@ Fig_sto <- ggplot(Art_sto, aes(x = V2, y = mean, fill = treatment)) +
         axis.text.y = element_text(colour = "black", size = 15),
         axis.text   = element_text(colour = "black"),
         legend.position = 'none') 
-Fig_sto
 
 ggsave(Fig_sto, file=paste(Fig, "abundance_micro_sto.pdf", sep=""), width=6, height=5, bg="transparent")
 
@@ -280,7 +278,6 @@ Fig_nic <- ggplot(Art_nic, aes(x = V2, y = mean, fill = treatment)) +
         axis.text.y = element_text(colour = "black", size = 15),
         axis.text   = element_text(colour = "black"),
         legend.position = 'none') 
-Fig_nic
 
 ggsave(Fig_nic, file=paste(Fig, "abundance_micro_nic.pdf", sep=""), width=6, height=5, bg="transparent")
 
