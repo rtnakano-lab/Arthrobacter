@@ -241,7 +241,50 @@ Fig_2B <- ggplot(Art_2B, aes(x = V2, y = mean, fill = treatment)) +
 
 ggsave(Fig_2B, file=paste(Fig, "Art_relative_abundance_Fig_2B.pdf", sep=""), width=6, height=5, bg="transparent")
 
-##Fig S5B
+                  
+## relative aboundance of genus Arthrobacter in metabolite-treated soils
+## Fig S2C (santhopine)                  
+Art_S5B$V2              <-factor(Art_S5B$V2,    levels=list_S5B )
+list_sto                 <- c("Santhopine 0","Santhopine 50", "Santhopine 250", "Santhopine 1000")
+Art_sto                  <- Art[Art$V2 %in% list_sto,]
+Art_sto$V2               <-factor(Art_sto$V2,    levels=list_sto)
+
+Fig_sto <- ggplot(Art_sto, aes(x = V2, y = mean, fill = treatment)) +
+  geom_bar(stat = "identity", colour = "black") +
+  geom_errorbar(aes(ymin = mean - sd, ymax = mean + sd, width = 0.3)) +
+  theme_classic(base_size = 20) +
+  scale_y_continuous(expand = c(0,0), limits = c(0, 25)) +
+  scale_fill_manual(values = col$col[col$names %in% unique(Art_sto$treatment)])+
+  labs( x= "",y = "Relative abundance of \nMicrococcaceae (%)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, colour = "black", size = 15),
+        axis.text.y = element_text(colour = "black", size = 15),
+        axis.text   = element_text(colour = "black"),
+        legend.position = 'none') 
+Fig_sto
+
+ggsave(Fig_sto, file=paste(Fig, "abundance_micro_sto.pdf", sep=""), width=6, height=5, bg="transparent")
+
+## Fig S2D (Nicotine)
+list_nic                 <- c("Nicotine 0","Nicotine 50", "Nicotine 250", "Nicotine 1000")
+Art_nic                  <- Art[Art$V2 %in% list_nic,]
+Art_nic$V2               <-factor(Art_nic$V2,    levels=list_nic)
+
+Fig_nic <- ggplot(Art_nic, aes(x = V2, y = mean, fill = treatment)) +
+  geom_bar(stat = "identity", colour = "black") +
+  geom_errorbar(aes(ymin = mean - sd, ymax = mean + sd, width = 0.3)) +
+  theme_classic(base_size = 20) +
+  scale_y_continuous(expand = c(0,0), limits = c(0, 25)) +
+  scale_fill_manual(values = col$col[col$names %in% unique(Art_nic$treatment)])+
+  labs( x= "",y = "Relative abundance of \nMicrococcaceae (%)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, colour = "black", size = 15),
+        axis.text.y = element_text(colour = "black", size = 15),
+        axis.text   = element_text(colour = "black"),
+        legend.position = 'none') 
+Fig_nic
+
+ggsave(Fig_nic, file=paste(Fig, "abundance_micro_nic.pdf", sep=""), width=6, height=5, bg="transparent")
+
+## Fig S5B (Dual)
 list_S5B 　　　　　　　　　<- c("Dual 0","Dual 500", "Dual 1000")
 Art_S5B                 <- Art[Art$V2 %in% list_S5B,]
 Art_S5B$V2              <-factor(Art_S5B$V2,    levels=list_S5B )
@@ -259,64 +302,3 @@ Fig_S5B <- ggplot(Art_S5B, aes(x = V2, y = mean, fill = treatment)) +
         legend.position = 'none') 
                   
 ggsave(Fig_S5B, file=paste(Fig, "Art_relative_abundance_Fig_S6B.pdf", sep=""), width=6, height=5, bg="transparent")
-
-## colleretion of Arthrobacter
-##Santhopine
-idx <- design$V1[design$treatment=="Sto"]
-sto_art <- Art_table[idx,]
-Sto_art <- data.frame(conc=as.numeric(c("1000", "1000", "1000", 
-                                        "50", "50", "50",
-                                        "250", "250", "250",
-                                        "0", "0", "0")),
-                      rel=sto_art,
-                      stringsAsFactors=F)
-
-Fig_S1C <- ggplot(Sto_art, aes(x= conc, y = rel)) +
-  geom_point()+
-  geom_smooth(method = "lm") +
-  theme_gray(base_size = 20) +
-  theme(axis.text.x = element_text(colour = "black", size = 15),
-        axis.text.y = element_text(colour = "black", size = 15),
-        strip.text  = element_text(size=20),
-        legend.position = 'none') +
-  labs(x= "Santhopine concentration\n(nmol/g soil)", y = "Relative abundance of \n Arthrobacter (%)")
-
-ggsave(Fig_S1C, file=paste(Fig, "correlation_arthro_soc_Fig_S2A.pdf", sep=""), width=6, height=5, bg="transparent")
-
-##Nicotine
-idx <- design$V1[design$treatment=="Nic"]
-nic_art <- Art_table[idx,]
-Nic_art <- data.frame(conc=as.numeric(c("250","250","250","250",
-                                        "1000","1000","1000","1000", 
-                                        "50","50","50","50",
-                                        "0","0","0","0")),
-                      rel=nic_art,
-                      stringsAsFactors=F)
-colnames(Nic_art) <- c("conc", "rel")
-
-Fig_S1D <- ggplot(Nic_art, aes(x= conc, y = rel)) +
-  geom_point()+
-  geom_smooth(method = "lm") +
-  theme_gray(base_size = 20) +
-  theme(axis.text.x = element_text(colour = "black", size = 15),
-        axis.text.y = element_text(colour = "black", size = 15),
-        strip.text  = element_text(size=20),
-        legend.position = 'none') +
-  labs(x= "Nicotine concentration\n(nmol/g soil)", y = "Relative abundance of \n Arthrobacter (%)")
-
-ggsave(Fig_S1D, file=paste(Fig, "correlation_arthro_nic_Fig_S2B.pdf", sep=""), width=6, height=5, bg="transparent")
-
-##Linear regression analysis
-# santhopine
-Sto_lm_art <- lm(rel~conc, Sto_art)
-Sto_lm.s <- summary(Sto_lm_art)
-sink(paste(data, "LRA_sto.txt", sep=""))
-print(Sto_lm.s)
-sink()
-
-# nivotine
-Nic_lm_art <- lm(rel~conc, Nic_art)
-Nic_lm.s <- summary(Nic_lm_art)
-sink(paste(data, "LRA_nic.txt", sep=""))
-print(Nic_lm.s)
-sink()
