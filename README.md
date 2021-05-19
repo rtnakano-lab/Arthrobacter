@@ -14,7 +14,7 @@ community_analysis.R
 GLM.R
 
 ##scripts related to comparative genome alanlysis of genus Arthrobacter  
-amphora.bash
+amphora.bash  
 KEGG_pan_genome.R  
 OG_pan_genome.R  
 rhizobia.sh  
