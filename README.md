@@ -1,6 +1,6 @@
-## Scripts of Shimasaki et. al, Tobacco root endophytic Arthrobacter harbors genomic features enabling the catabolism of host-specific plant specialized metabolites, in press
+## Scripts related to "Tobacco root endophytic Arthrobacter harbors genomic features enabling the catabolism of host-specific plant specialized metabolites" by Shimasaki et. al, mBio, in press (2021)
 
-Originally by Tomohisa Shimasaki & Nakano Thomas Rhyohei 
+Originally by Tomohisa Shimasaki & Ryohei Thomas Nakano
 
  shimasaki.tomohisa.3e@kyoto-u.ac.jp    
  nakano@mpipz.mpg.de
@@ -14,6 +14,7 @@ community_analysis.R
 GLM.R
 
 ##scripts related to comparative genome alanlysis of genus Arthrobacter  
+amphora.bash
 KEGG_pan_genome.R  
 OG_pan_genome.R  
 rhizobia.sh  
